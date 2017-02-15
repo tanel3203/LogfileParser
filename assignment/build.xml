@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project default="run" name="Logfile analyser">
+
+    <!-- define properties -->
+    <property name="build.dir" value="dist" />
+    <property name="classes.dir" value="${build.dir}/classes" />
+    <property name="src.dir" value="src" />
+    <property name="lib.dir" value="${build.dir}/lib" />
+
+    <property name="main-class" value="ee.timing.Main" />
+    <property name="jar-name" value="assignment" />
+
+    <path id="classpath">
+        <fileset dir="${lib.dir}" includes="**/*.jar" />
+    </path>
+
+    <!-- compile target -->
+    <target name="compile">
+        <javac srcdir="${src.dir}"
+               destdir="${classes.dir}"
+               includeantruntime="false"
+               classpathref="classpath">
+            <exclude name="**/*Test.java" />
+        </javac>
+    </target>
+
+    <!-- define build target -->
+    <target name="build-jar" depends="prep-dirs,compile">
+
+        <jar destfile="${build.dir}/${jar-name}.jar"
+             basedir="${classes.dir}"
+             excludes="${src.dir}/**/*Test.java" >
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <!-- make directories for build -->
+    <target name="prep-dirs">
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${lib.dir}"/>
+    </target>
+
+    <!-- run -->
+    <target name="run" depends="build-jar">
+        <java classname="${main-class}" fork="true">
+            <classpath>
+                <path refid="classpath" />
+                <path location="${build.dir}/${jar-name}.jar" />
+            </classpath>
+        </java>
+    </target>
+
+    <!-- clean -->
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+
+</project>

@@ -1,7 +1,5 @@
 package ee.timing;
 
-import sun.rmi.runtime.Log;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
@@ -152,17 +150,10 @@ class Cleaner {
             }
         });
 
-        /*
-        System.out.println("---------------");
-        for (LogFileLineStorable item : logFileData) {
-            System.out.println(item.getTimestamp() + " " + item.getResourceName() + " " + item.getRequestDuration());
-        }
-        */
         System.out.format("%15s%15s%15s%3s%15s", "Hour", "Request count", "Total requests", "   ", " Requests (%)");
         System.out.println("");
         System.out.println("--------------------------------------------------------------");
         for (LogFileHistogramHourStorable item : logFileHistogramHourData) {
-            //System.out.print(item.getTimestamp() + " " + item.getRequestCount() + " " + currentLineCounter + " | ");
             System.out.format("%15s%15d%15d%3s", item.getTimestamp(), item.getRequestCount(), currentLineCounter, " | ");
             double percentOfTotal = 10 * (double) item.getRequestCount() / currentLineCounter;
 
