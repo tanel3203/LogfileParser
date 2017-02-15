@@ -42,4 +42,18 @@ public class CleanerTest {
         assertEquals(-1,cleaner.getIndexOfExistingResource(array, "test"));
 
     }
+
+    @Test
+    public void testTimestampReturnsCorrectHourValue() {
+
+        Cleaner cleaner = new Cleaner();
+
+        // Testcases
+        assertEquals("00",cleaner.getHourStringFromTimestamp("00:06:48,249"));
+        assertEquals("23",cleaner.getHourStringFromTimestamp("23:06:48,249"));
+        //assertEquals("?",cleaner.getHourStringFromTimestamp("29:06:48,249"));
+        //assertEquals("?",cleaner.getHourStringFromTimestamp("299:06:48,249"));
+        //assertEquals("?",cleaner.getHourStringFromTimestamp("-1"));
+        //assertEquals("?",cleaner.getHourStringFromTimestamp("22"));
+    }
 }

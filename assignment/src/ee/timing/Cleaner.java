@@ -8,12 +8,20 @@ import java.util.*;
 
 class Cleaner {
 
+    // Class objects
     private ArrayList<LogFileLineStorable> logFileData = new ArrayList<>();
+    private ArrayList<LogFileHistogramHourStorable> logFileHistogramHourData = new ArrayList<>();
     private List<String> currentLine;
-    private int currentLineCounter = 0;
-    private static String FILE_COLUMN_DELIMITER = " ";
-    private static String RESOURCE_NAME_REGEX = "(^/)";
 
+    // Class static variables
+    private static int currentLineCounter = 0;
+
+    // Constants
+    private static final String PATH_NAME = "resources/timing.log";
+    private static final String FILE_COLUMN_DELIMITER = " ";
+    private static final String RESOURCE_NAME_REGEX = "(^/)";
+
+    // Constructor
     Cleaner() {
     }
 
@@ -21,7 +29,7 @@ class Cleaner {
     void generateLogFileData() throws FileNotFoundException {
 
         // Get the file
-        Scanner input = new Scanner(new File("resources/timing.log"));
+        Scanner input = new Scanner(new File(PATH_NAME));
 
         // Get every line from file and prepare the object with a pre-determined delimiter
         while (input.hasNextLine()) {
@@ -40,15 +48,23 @@ class Cleaner {
 
             // Get columns from logfile line
             if (currentLineSize == 7 || currentLineSize == 8) {
+
+                // Variables for logFileData
                 String currentLineTimestamp = currentLine.get(1);
                 String currentLineResourceName = getResourceName(currentLine.get(4));
                 String currentLineRequestDuration = currentLine.get(currentLine.size() - 1);
 
+                // Additional variables for logFileHistogramData
+                String currentLineTimestampHour = getHourStringFromTimestamp(currentLine.get(1));
+
                 // Find if logFileData already has a record of current resource
                 int resourceExistsIndex = getIndexOfExistingResource(logFileData, currentLineResourceName);
 
-                System.out.println(currentLineTimestamp + " " + currentLineResourceName + " " + currentLineRequestDuration);
+                // Find if logFileHistogramData already has data for the given hour
+                int hourExistsIndex = getIndexOfExistingHour(logFileHistogramHourData, currentLineTimestampHour);
 
+                //System.out.println(currentLineTimestamp + " " + currentLineResourceName + " " + currentLineRequestDuration);
+                //System.out.println(currentLineTimestampHour + " " + currentLineRequestDuration);
 
 
 
@@ -66,6 +82,7 @@ class Cleaner {
 
                     logFileData.set(resourceExistsIndex, new LogFileLineStorable(currentLineTimestamp, currentLineResourceName, newRecString));
 
+
                 }
                 // Add new record into logFileData
                 else if (resourceExistsIndex == -1) {
@@ -79,6 +96,36 @@ class Cleaner {
                     throw new IllegalArgumentException("Unexpected result with resource name on line " + currentLineCounter
                                                     + " with value " + currentLineResourceName);
                 }
+
+
+
+
+                // Update current record in existing logFileHistogramData
+                if (hourExistsIndex >= 0) {
+
+                    int existingHourDataCount = logFileHistogramHourData.get(hourExistsIndex).getRequestCount();
+                    existingHourDataCount++;
+
+                    logFileHistogramHourData.set(hourExistsIndex, new LogFileHistogramHourStorable(currentLineTimestampHour, existingHourDataCount));
+
+
+                }
+                // Add new record into logFileData
+                else if (hourExistsIndex == -1) {
+
+                    logFileHistogramHourData.add(new LogFileHistogramHourStorable(currentLineTimestampHour, 1));
+
+
+
+
+                } else {
+                    throw new IllegalArgumentException("Unexpected result on line " + currentLineCounter
+                            + " with value " + currentLineTimestampHour);
+                }
+
+
+
+
 
             } else {
                 /*throw new IllegalArgumentException("Current line in logfile does not conform to predefined requirements on line " + currentLineCounter
@@ -97,10 +144,23 @@ class Cleaner {
                 return p2.getRequestDurationCast() - p1.getRequestDurationCast(); // Descending
             }
         });
-
+        /*
         System.out.println("---------------");
         for (LogFileLineStorable item : logFileData) {
             System.out.println(item.getTimestamp() + " " + item.getResourceName() + " " + item.getRequestDuration());
+        }
+        */
+        System.out.println("---------------");
+        for (LogFileHistogramHourStorable item : logFileHistogramHourData) {
+            System.out.print(item.getTimestamp() + " " + item.getRequestCount() + " " + currentLineCounter + " | ");
+
+            double percentOfTotal = 10 * (double) item.getRequestCount() / currentLineCounter;
+
+            for (int i = 0; i < percentOfTotal; i++) {
+                System.out.print("#");
+            }
+            System.out.println("");
+
         }
 
     }
@@ -130,7 +190,6 @@ class Cleaner {
                 matchFound = true;
                 break;
             }
-
         }
 
         if (!matchFound) {
@@ -138,5 +197,38 @@ class Cleaner {
         }
 
         return index;
+    }
+
+    int getIndexOfExistingHour(ArrayList<LogFileHistogramHourStorable> array, String searchString) {
+        int index = -1;
+        boolean matchFound = false;
+        for (LogFileHistogramHourStorable item : array) {
+
+            index++;
+
+            if (item.containsTimestamp(searchString)) {
+                matchFound = true;
+                break;
+            }
+        }
+
+        if (!matchFound) {
+            index = -1;
+        }
+
+        return index;
+    }
+
+    String getHourStringFromTimestamp(String timestamp) {
+        String hourValue = timestamp.substring(0, timestamp.indexOf(":"));
+        if (hourValue.length() != 2) {
+            /*throw new IllegalFormatException("Value '" + hourValue + "' does not conform to expected value length");*/
+            // add test case
+        }
+        if ((Integer.parseInt(hourValue) <= 24) && Integer.parseInt(hourValue) >= 0) {
+            /* throw ... */
+            // add test case
+        }
+        return hourValue;
     }
 }

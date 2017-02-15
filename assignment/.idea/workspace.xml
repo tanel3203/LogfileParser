@@ -16,11 +16,21 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ee/timing/Main.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="187">
+              <caret line="11" column="38" lean-forward="true" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Cleaner.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/ee/timing/Cleaner.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="91" column="9" lean-forward="true" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
+            <state relative-caret-position="340">
+              <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -31,11 +41,9 @@
       <file leaf-file-name="CleanerTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ee/timing/CleanerTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state relative-caret-position="68">
+              <caret line="4" column="27" lean-forward="true" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -43,8 +51,8 @@
       <file leaf-file-name="LogFileLineStorable.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ee/timing/LogFileLineStorable.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="20" column="37" lean-forward="false" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="37" />
+            <state relative-caret-position="510">
+              <caret line="30" column="24" lean-forward="false" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
               <folding>
                 <element signature="e#182#183#0" expanded="true" />
                 <element signature="e#214#215#0" expanded="true" />
@@ -61,11 +69,28 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="LogFileHistogramHourStorable.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ee/timing/LogFileHistogramHourStorable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="272">
+              <caret line="17" column="67" lean-forward="false" selection-start-line="17" selection-start-column="67" selection-end-line="17" selection-end-column="67" />
+              <folding>
+                <element signature="e#181#182#0" expanded="true" />
+                <element signature="e#213#214#0" expanded="true" />
+                <element signature="e#249#250#0" expanded="true" />
+                <element signature="e#284#285#0" expanded="true" />
+                <element signature="e#488#489#0" expanded="true" />
+                <element signature="e#535#536#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="timing.log" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/resources/timing.log">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="220">
-              <caret line="988" column="37" lean-forward="true" selection-start-line="988" selection-start-column="37" selection-end-line="988" selection-end-column="37" />
+            <state relative-caret-position="506">
+              <caret line="129" column="13" lean-forward="false" selection-start-line="129" selection-start-column="13" selection-end-line="129" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -99,9 +124,12 @@
         <option value="$PROJECT_DIR$/src/ee/timing/LogFileLineLong.java" />
         <option value="$PROJECT_DIR$/src/ee/timing/test/CleanerTest.java" />
         <option value="$PROJECT_DIR$/src/ee/timing/MainTest.java" />
-        <option value="$PROJECT_DIR$/src/ee/timing/Main.java" />
         <option value="$PROJECT_DIR$/src/ee/timing/CleanerTest.java" />
+        <option value="$PROJECT_DIR$/src/ee/timing/LogFileHistogramStorable.java" />
         <option value="$PROJECT_DIR$/src/ee/timing/LogFileLineStorable.java" />
+        <option value="$PROJECT_DIR$/resources/timing.log" />
+        <option value="$PROJECT_DIR$/src/ee/timing/LogFileHistogramHourStorable.java" />
+        <option value="$PROJECT_DIR$/src/ee/timing/Main.java" />
         <option value="$PROJECT_DIR$/src/ee/timing/Cleaner.java" />
       </list>
     </option>
@@ -425,15 +453,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="RunCleanerTest - 2017.02.14 at 05h 39m 43s.xml">
-      <configuration name="RunCleanerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RunCleanerTest - 2017.02.14 at 05h 40m 08s.xml">
-      <configuration name="RunCleanerTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RunCleanerTest - 2017.02.14 at 05h 41m 28s.xml">
-      <configuration name="RunCleanerTest" configurationId="JUnit" />
-    </history-entry>
     <history-entry file="RunCleanerTest - 2017.02.14 at 05h 41m 37s.xml">
       <configuration name="RunCleanerTest" configurationId="JUnit" />
     </history-entry>
@@ -453,6 +472,15 @@
       <configuration name="RunCleanerTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="RunCleanerTest - 2017.02.14 at 05h 45m 43s.xml">
+      <configuration name="RunCleanerTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RunCleanerTest - 2017.02.14 at 17h 51m 06s.xml">
+      <configuration name="RunCleanerTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RunCleanerTest - 2017.02.14 at 17h 51m 29s.xml">
+      <configuration name="RunCleanerTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RunCleanerTest - 2017.02.14 at 18h 25m 44s.xml">
       <configuration name="RunCleanerTest" configurationId="JUnit" />
     </history-entry>
   </component>
@@ -476,6 +504,7 @@
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24951768" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32996634" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -486,7 +515,6 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -515,41 +543,38 @@
         <state relative-caret-position="119">
           <caret line="7" column="13" lean-forward="false" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ee/timing/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" column="10" lean-forward="false" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/resources/timing.log">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="220">
-          <caret line="988" column="37" lean-forward="true" selection-start-line="988" selection-start-column="37" selection-end-line="988" selection-end-column="37" />
+        <state relative-caret-position="506">
+          <caret line="129" column="13" lean-forward="false" selection-start-line="129" selection-start-column="13" selection-end-line="129" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ee/timing/CleanerTest.java">
+    <entry file="file://$PROJECT_DIR$/src/ee/timing/LogFileHistogramHourStorable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="15" column="20" lean-forward="false" selection-start-line="15" selection-start-column="20" selection-end-line="15" selection-end-column="20" />
+        <state relative-caret-position="272">
+          <caret line="17" column="67" lean-forward="false" selection-start-line="17" selection-start-column="67" selection-end-line="17" selection-end-column="67" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="e#181#182#0" expanded="true" />
+            <element signature="e#213#214#0" expanded="true" />
+            <element signature="e#249#250#0" expanded="true" />
+            <element signature="e#284#285#0" expanded="true" />
+            <element signature="e#488#489#0" expanded="true" />
+            <element signature="e#535#536#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/ee/timing/LogFileLineStorable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="20" column="37" lean-forward="false" selection-start-line="20" selection-start-column="15" selection-end-line="20" selection-end-column="37" />
+        <state relative-caret-position="510">
+          <caret line="30" column="24" lean-forward="false" selection-start-line="30" selection-start-column="24" selection-end-line="30" selection-end-column="24" />
           <folding>
             <element signature="e#182#183#0" expanded="true" />
             <element signature="e#214#215#0" expanded="true" />
@@ -565,10 +590,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/ee/timing/CleanerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="27" lean-forward="true" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ee/timing/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="38" lean-forward="true" selection-start-line="11" selection-start-column="38" selection-end-line="11" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ee/timing/Cleaner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="91" column="9" lean-forward="true" selection-start-line="91" selection-start-column="9" selection-end-line="91" selection-end-column="9" />
+        <state relative-caret-position="340">
+          <caret line="47" column="0" lean-forward="true" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
