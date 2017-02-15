@@ -144,22 +144,33 @@ class Cleaner {
                 return p2.getRequestDurationCast() - p1.getRequestDurationCast(); // Descending
             }
         });
+
+        Collections.sort(logFileHistogramHourData, new Comparator<LogFileHistogramHourStorable>() {
+            @Override
+            public int compare(LogFileHistogramHourStorable p1, LogFileHistogramHourStorable p2) {
+                return p2.getRequestCount() - p1.getRequestCount(); // Descending
+            }
+        });
+
         /*
         System.out.println("---------------");
         for (LogFileLineStorable item : logFileData) {
             System.out.println(item.getTimestamp() + " " + item.getResourceName() + " " + item.getRequestDuration());
         }
         */
-        System.out.println("---------------");
+        System.out.format("%15s%15s%15s%3s%15s", "Hour", "Request count", "Total requests", "   ", " Requests (%)");
+        System.out.println("");
+        System.out.println("--------------------------------------------------------------");
         for (LogFileHistogramHourStorable item : logFileHistogramHourData) {
-            System.out.print(item.getTimestamp() + " " + item.getRequestCount() + " " + currentLineCounter + " | ");
-
+            //System.out.print(item.getTimestamp() + " " + item.getRequestCount() + " " + currentLineCounter + " | ");
+            System.out.format("%15s%15d%15d%3s", item.getTimestamp(), item.getRequestCount(), currentLineCounter, " | ");
             double percentOfTotal = 10 * (double) item.getRequestCount() / currentLineCounter;
 
             for (int i = 0; i < percentOfTotal; i++) {
                 System.out.print("#");
             }
             System.out.println("");
+            System.out.println("--------------------------------------------------------------");
 
         }
 
