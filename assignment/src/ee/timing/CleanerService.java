@@ -4,7 +4,11 @@ import java.io.File;
 import java.util.*;
 
 /**
- *
+ * Service class to
+ *                  parse the log file
+ *                  extract
+ *                  aggregate and
+ *                  present data from it
  */
 
 class CleanerService {
@@ -26,7 +30,12 @@ class CleanerService {
     CleanerService() {
     }
 
-    // Get the logfile and prepare an object that can be used for further manipulation
+    /**
+     * Gets the logfile and prepares an object that can be used for further manipulation
+     * @param pathToLogfile
+     * @throws Exception
+     */
+    //
     void generateLogFileData(String pathToLogfile) throws Exception {
 
         // Get the file
@@ -150,7 +159,15 @@ class CleanerService {
 
     }
 
-    // Clean resource name string if necessary (e.g. it is a full URI+query string)
+    /**
+     * Cleans resource name string if necessary (e.g. it is a full URI+query string)
+     * @param resourceString            takes a string type variable and either returns it
+     *                                  if it has no additional information attached to it
+     *                                  or cleans that information and returns a clean
+     *                                  resource name
+     *
+     * @return                          returns String type resource name
+     */
     String getResourceName(String resourceString) {
 
         // Find if given string is already a resource name, then return the initial string
@@ -166,7 +183,13 @@ class CleanerService {
         return resourceName;
     }
 
-    // Find the index of existing resource name
+    /**
+     * Finds the index of existing resource name for logFileData
+     * @param array                 array the resource name is searched from
+     * @param searchString          resource name that is looked for
+     * @return                      returns index of existing resource name
+     *                              if none exists, returns -1
+     */
     int getIndexOfExistingResource(ArrayList<LogFileLineStorable> array, String searchString) {
 
         int index = -1;
@@ -189,7 +212,13 @@ class CleanerService {
         return index;
     }
 
-    // Find the index of existing hour object
+    /**
+     * Finds the index of existing hour object for logFileHistogramHourData
+     * @param array                     array the hour object is searched from
+     * @param searchString              hour object identifier that is looked for
+     * @return                          returns index of existing object
+     *                                  if none exists, returns -1
+     */
     int getIndexOfExistingHour(ArrayList<LogFileHistogramHourStorable> array, String searchString) {
 
         int index = -1;
@@ -212,6 +241,11 @@ class CleanerService {
         return index;
     }
 
+    /**
+     * Gets the hour string from full timestamp (i.e. '00' from '00:01:23,794')
+     * @param timestamp             full timestamp String value (e.g. '00:01:23,794')
+     * @return                      returns hour String value (e.g. '00')
+     */
     String getHourStringFromTimestamp(String timestamp) {
         String hourValue = timestamp.substring(0, timestamp.indexOf(":"));
         if (hourValue.length() != 2) {
