@@ -1,6 +1,8 @@
 package ee.timing;
 
-import java.util.ArrayList;
+/**
+ * Model class for hourly data to compose the histogram, used in CleanerService.java
+ */
 
 class LogFileHistogramHourStorable {
 
@@ -22,6 +24,10 @@ class LogFileHistogramHourStorable {
 
     boolean containsTimestamp(String string) {
         return timestamp.equals(string);
+    }
+
+    public int compareTimestamp() {
+        return Integer.parseInt(timestamp);
     }
 
 

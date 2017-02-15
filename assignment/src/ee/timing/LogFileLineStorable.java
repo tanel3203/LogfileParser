@@ -1,5 +1,9 @@
 package ee.timing;
 
+/**
+ * Model class for storing resource data, used in CleanerService.java
+ */
+
 class LogFileLineStorable {
 
     private String timestamp;

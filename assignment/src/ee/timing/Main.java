@@ -1,8 +1,22 @@
 package ee.timing;
 
+/**
+ * Main class for running the application from the command line.
+ */
+
 public class Main {
+
+    //  ----------------------------------- TEMPORARY
     private static final String PATH_NAME = "resources/timing.log";
 
+    /**
+     * Entry point that starts the application. The purpose is to show the n most time-duration heavy resources and
+     * an hourly aggregation of requests. Additionally, an hourly requests histogram is displayed alongside the table.
+     * @param args          application parameters. Program takes 1-2 arguments from command-line in no specific order.
+     *                      (optionally) the '-h' tag argument which displays help information and
+     *                      (mandatory) logfile name (if current location) or full path.
+     * @throws Exception
+     */
     public static void main(String[] args) throws Exception {
 
         // Start stopwatch for program run time
@@ -45,10 +59,10 @@ public class Main {
     private static void startLogFileClean(String logFile) throws Exception {
 
         // Initialize logfile cleaner
-        Cleaner cleaner = new Cleaner();
+        CleanerService cleanerService = new CleanerService();
 
         // Run cleaner
-        cleaner.generateLogFileData(logFile);
+        cleanerService.generateLogFileData(logFile);
 
     }
 
