@@ -41,7 +41,9 @@ class CleanerService {
         // Get the file
         Scanner input = new Scanner(new File(pathToLogfile));
 
-        // Get every line from file and prepare the object with a pre-determined delimiter
+        // Get every line from file and with a pre-determined delimiter prepare
+        //                              1) logFileData           - outputs time-heavy resources
+        //                              2) logHistogramHourData  - outputs hourly info and a histogram
         while (input.hasNextLine()) {
 
             // Set counter to current line;
