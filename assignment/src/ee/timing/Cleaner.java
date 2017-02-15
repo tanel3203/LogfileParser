@@ -15,7 +15,6 @@ class Cleaner {
     private static int currentLineCounter = 0;
 
     // Constants
-    private static final String PATH_NAME = "resources/timing.log";
     private static final String FILE_COLUMN_DELIMITER = " ";
     private static final String RESOURCE_NAME_REGEX = "(^/)";
 
@@ -24,10 +23,10 @@ class Cleaner {
     }
 
     // Get the logfile and prepare an object that can be used for further manipulation
-    void generateLogFileData() throws FileNotFoundException {
+    void generateLogFileData(String PATH_TO_LOGFILE) throws Exception {
 
         // Get the file
-        Scanner input = new Scanner(new File(PATH_NAME));
+        Scanner input = new Scanner(new File(PATH_TO_LOGFILE));
 
         // Get every line from file and prepare the object with a pre-determined delimiter
         while (input.hasNextLine()) {
