@@ -1,5 +1,7 @@
 package ee.timing;
 
+import java.io.FileNotFoundException;
+
 /**
  * Main class for running the application from the command line.
  */
@@ -8,8 +10,7 @@ public class FileParser {
 
     // Constants
     private static final int MAX_RESOURCE_REQUEST_COUNT = 50;
-    private static final int ARGS_COUNT_LOWER_BOUND = 2;
-    private static final int ARGS_COUNT_UPPER_BOUND = 3;
+    private static final int ARGS_COUNT_ONLY_HELP = 1;
     private static final int ARGS_COUNT_NO_HELP = 2;
     private static final int ARGS_COUNT_WITH_HELP = 3;
 
@@ -30,22 +31,25 @@ public class FileParser {
         int argumentsLength = args.length;
 
         // Logic for handling user input
-        if (argumentsLength < ARGS_COUNT_LOWER_BOUND || argumentsLength > ARGS_COUNT_UPPER_BOUND) {
-            throw new Exception("Illegal request. 2-3 arguments are allowed. One log file argument, resource count and optionally '-h' for help info\n\n"
-                    + "Use the following format: '[-h] <logfilepath> <resource count>");
-        } else if (argumentsLength >= ARGS_COUNT_LOWER_BOUND && argumentsLength <= ARGS_COUNT_UPPER_BOUND) {
-            if (args[0].length() == 2 && args[0].contains("h") && argumentsLength == ARGS_COUNT_WITH_HELP) {
+        try {
+            if (args[0].length() == 2 && args[0].contains("h") && argumentsLength == ARGS_COUNT_ONLY_HELP) {
+                outputHelperInfo();
+            } else if (args[0].length() == 2 && args[0].contains("h") && argumentsLength == ARGS_COUNT_WITH_HELP) {
                 outputHelperInfo();
                 startLogFileClean(args[1], args[2]);
             }  else if (Integer.parseInt(args[1]) < MAX_RESOURCE_REQUEST_COUNT && argumentsLength == ARGS_COUNT_NO_HELP) {
                 startLogFileClean(args[0], args[1]);
             } else {
-                throw new Exception("Illegal request. 2-3 arguments are allowed. One log file argument, resource count and optionally '-h' for help info\n\n"
-                                    + "Use the following format: '[-h] <logfilepath> <resource count>");
+                throw new IllegalArgumentException("Illegal request. 2-3 arguments are allowed. One log file argument, resource count and optionally '-h' for help info\n\n"
+                        + "Use the following format: '[-h] <logfilepath> <resource count>");
             }
-        } else {
-            throw new Exception("Illegal request. 2-3 arguments are allowed. One log file argument, resource count and optionally '-h' for help info\n\n"
-                    + "Use the following format: '[-h] <logfilepath> <resource count>");        }
+
+        } catch (FileNotFoundException e) {
+            System.out.println("Your file was not found. Please check that you have the path and filename correct.");
+            System.out.println(e);
+        } catch (IllegalArgumentException e) {
+            System.out.println(e);
+        }
 
         // Stop stopwatch for program run time
         long endTime = System.currentTimeMillis();
@@ -81,8 +85,8 @@ public class FileParser {
         System.out.format("%10s%50s\n", "usage", "description");
         System.out.format("%10s%50s\n", "'-h'", "tag to access this page");
         System.out.format("%10s%50s\n", "'ant run'", "builds and runs current program with presets");
-        System.out.format("%10s%50s\n", "'ant build'", "builds current program");
-        System.out.format("%10s%50s\n", "'java -jar <jarpath> <logfilepath> <n>'", "\n\t\t\tbuilds logfile program w/ n rows");
+        System.out.format("%10s%50s\n", "'ant build-jar'", "builds current program");
+        System.out.format("%10s%50s\n", "'java -jar <jarpath> [-h] <logfilepath> <n>'", "\n\t\t\tbuilds logfile program w/ n rows and help info");
         System.out.println("--------------------------------------------------------------");
         System.out.println("Example use: go to program directory (where build.xml lives),");
         System.out.println("\trun 'ant build-jar', then go to dist folder and");

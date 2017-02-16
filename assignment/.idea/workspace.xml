@@ -19,18 +19,42 @@
       <file leaf-file-name="FileParser.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/ee/timing/FileParser.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="53" column="35" lean-forward="true" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
+            <state relative-caret-position="206">
+              <caret line="37" column="26" lean-forward="true" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="build.xml" pinned="false" current-in-tab="true">
+      <file leaf-file-name="FileParserControllerTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/ee/timing/tests/FileParserControllerTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="391">
+              <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileParserController.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/ee/timing/FileParserController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="356">
+              <caret line="50" column="23" lean-forward="true" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="build.xml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/build.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="21" column="40" lean-forward="true" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+            <state relative-caret-position="442">
+              <caret line="26" column="32" lean-forward="true" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
               <folding />
             </state>
           </provider>
@@ -107,9 +131,10 @@
         <option value="$PROJECT_DIR$/src/ee/timing/histogram/HistogramService.java" />
         <option value="$PROJECT_DIR$/src/ee/timing/Main.java" />
         <option value="$PROJECT_DIR$/src/ee/timing/FileParserService.java" />
+        <option value="$PROJECT_DIR$/build.xml" />
+        <option value="$PROJECT_DIR$/src/ee/timing/FileParserController.java" />
         <option value="$PROJECT_DIR$/src/ee/timing/FileParser.java" />
         <option value="$PROJECT_DIR$/src/ee/timing/tests/FileParserServiceTest.java" />
-        <option value="$PROJECT_DIR$/build.xml" />
       </list>
     </option>
   </component>
@@ -267,10 +292,10 @@
       <recent name="C:\Users\Tanel\IdeaProjects\assignment\dist" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.RunFileParserControllerTest">
     <configuration default="false" name="Main" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" value="ee.timing.Main" />
+      <option name="MAIN_CLASS_NAME" value="ee.timing.FileParser" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="-h resources/timing.log 10" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -487,13 +512,13 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="RunResourceDurationTest" type="JUnit" factoryName="JUnit">
+    <configuration default="false" name="RunResourceInfoServiceTest" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="assignment" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="ee.timing.tests" />
-      <option name="MAIN_CLASS_NAME" value="ee.timing.tests.ResourceDurationServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="ee.timing.tests.ResourceInfoServiceTest" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="" />
@@ -508,13 +533,13 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="false" name="RunFileParserTest" type="JUnit" factoryName="JUnit">
+    <configuration default="false" name="RunFileParserControllerTest" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="assignment" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PACKAGE_NAME" value="ee.timing.tests" />
-      <option name="MAIN_CLASS_NAME" value="ee.timing.tests.FileParserServiceTest" />
+      <option name="MAIN_CLASS_NAME" value="ee.timing.tests.FileParserControllerTest" />
       <option name="METHOD_NAME" value="" />
       <option name="TEST_OBJECT" value="class" />
       <option name="VM_PARAMETERS" value="" />
@@ -531,8 +556,8 @@
     </configuration>
     <list size="4">
       <item index="0" class="java.lang.String" itemvalue="JUnit.RunHistogramTest" />
-      <item index="1" class="java.lang.String" itemvalue="JUnit.RunResourceDurationTest" />
-      <item index="2" class="java.lang.String" itemvalue="JUnit.RunFileParserTest" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.RunResourceInfoServiceTest" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.RunFileParserControllerTest" />
       <item index="3" class="java.lang.String" itemvalue="Application.Main" />
     </list>
     <recent_temporary>
@@ -555,17 +580,8 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="RunHistogramTest - 2017.02.16 at 06h 33m 09s.xml">
-      <configuration name="RunHistogramTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RunHistogramTest - 2017.02.16 at 06h 33m 48s.xml">
-      <configuration name="RunHistogramTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RunHistogramTest - 2017.02.16 at 06h 34m 42s.xml">
-      <configuration name="RunHistogramTest" configurationId="JUnit" />
-    </history-entry>
-    <history-entry file="RunHistogramTest - 2017.02.16 at 06h 36m 10s.xml">
-      <configuration name="RunHistogramTest" configurationId="JUnit" />
+    <history-entry file="RunFileParserControllerTest - 2017.02.17 at 01h 24m 23s.xml">
+      <configuration name="RunFileParserControllerTest" configurationId="JUnit" />
     </history-entry>
     <history-entry file="RunHistogramTest - 2017.02.16 at 06h 37m 03s.xml">
       <configuration name="RunHistogramTest" configurationId="JUnit" />
@@ -585,6 +601,15 @@
     <history-entry file="RunHistogramTest - 2017.02.16 at 06h 40m 36s.xml">
       <configuration name="RunHistogramTest" configurationId="JUnit" />
     </history-entry>
+    <history-entry file="RunHistogramTest - 2017.02.17 at 01h 24m 08s.xml">
+      <configuration name="RunHistogramTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RunResourceDurationTest - 2017.02.17 at 01h 23m 19s.xml">
+      <configuration name="RunResourceDurationTest" configurationId="JUnit" />
+    </history-entry>
+    <history-entry file="RunResourceInfoServiceTest - 2017.02.17 at 01h 24m 13s.xml">
+      <configuration name="RunResourceInfoServiceTest" configurationId="JUnit" />
+    </history-entry>
   </component>
   <component name="ToolWindowManager">
     <frame x="220" y="96" width="1682" height="1000" extended-state="0" />
@@ -599,7 +624,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32996634" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32996634" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -738,16 +763,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ee/timing/FileParserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="0" lean-forward="true" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ee/timing/histogram/HistogramStorable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -760,16 +775,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="14" column="20" lean-forward="true" selection-start-line="14" selection-start-column="20" selection-end-line="14" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/ee/timing/tests/FileParserServiceTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="38" lean-forward="false" selection-start-line="6" selection-start-column="38" selection-end-line="6" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -806,6 +811,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/assignment.iml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/ee/timing/resourceinfo/ResourceInfoService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
@@ -814,19 +827,39 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/ee/timing/FileParser.java">
+    <entry file="file://$PROJECT_DIR$/src/ee/timing/FileParserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="53" column="35" lean-forward="true" selection-start-line="53" selection-start-column="35" selection-end-line="53" selection-end-column="35" />
-          <folding />
+        <state relative-caret-position="356">
+          <caret line="50" column="23" lean-forward="true" selection-start-line="50" selection-start-column="23" selection-end-line="50" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/build.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="40" lean-forward="true" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="40" />
+        <state relative-caret-position="442">
+          <caret line="26" column="32" lean-forward="true" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ee/timing/FileParser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="37" column="26" lean-forward="true" selection-start-line="37" selection-start-column="26" selection-end-line="37" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ee/timing/tests/FileParserControllerTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="23" column="0" lean-forward="true" selection-start-line="23" selection-start-column="0" selection-end-line="23" selection-end-column="0" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

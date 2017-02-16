@@ -7,7 +7,7 @@ import org.junit.Test;
  * Test class for FileParserController
  */
 
-public class FileParserServiceTest {
+public class FileParserControllerTest {
 
     @Test(expected = Exception.class)
     public void testBadPathShouldThrowException() throws Exception {
