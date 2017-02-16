@@ -1,27 +1,27 @@
-package ee.timing;
+package ee.timing.resourceinfo;
 
 /**
  * Model class for storing resource data, used in CleanerService.java
  */
 
-class LogFileLineStorable {
+public class ResourceDurationStorable {
 
     private String resourceName;
-    private String requestDuration;
+    private double requestDuration;
 
     public String getResourceName() {
         return resourceName;
     }
 
-    public String getRequestDuration() {
+    public double getRequestDuration() {
         return requestDuration;
     }
 
-    public int getRequestDurationCast() {
-        return Integer.parseInt(requestDuration);
+    public int getRequestDurationInteger() {
+        return (int) requestDuration;
     }
 
-    LogFileLineStorable(String resourceName, String requestDuration) {
+    public ResourceDurationStorable(String resourceName, double requestDuration) {
         this.resourceName = resourceName;
         this.requestDuration = requestDuration;
     }

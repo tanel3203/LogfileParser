@@ -1,10 +1,10 @@
-package ee.timing;
+package ee.timing.histogram;
 
 /**
  * Model class for hourly data to compose the histogram, used in CleanerService.java
  */
 
-class LogFileHistogramHourStorable {
+public class LogFileHistogramHourStorable {
 
     private String timestamp;
     private int requestCount;
@@ -17,12 +17,12 @@ class LogFileHistogramHourStorable {
         return requestCount;
     }
 
-    LogFileHistogramHourStorable(String timestamp, int requestCount) {
+    public LogFileHistogramHourStorable(String timestamp, int requestCount) {
         this.timestamp = timestamp;
         this.requestCount = requestCount;
     }
 
-    boolean containsTimestamp(String string) {
+    public boolean containsTimestamp(String string) {
         return timestamp.equals(string);
     }
 

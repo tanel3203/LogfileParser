@@ -1,16 +1,15 @@
-package ee.timing;
+package ee.timing.tests;
 
-import com.sun.org.apache.xpath.internal.operations.Mult;
+import ee.timing.CleanerService;
+import ee.timing.histogram.HistogramService;
+import ee.timing.resourceinfo.ResourceDurationService;
+import ee.timing.resourceinfo.ResourceDurationStorable;
 import org.junit.Test;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static java.util.function.Function.identity;
 import static java.util.stream.Collectors.averagingInt;
-import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
 import static org.junit.Assert.*;
 
@@ -23,46 +22,46 @@ public class CleanerServiceTest {
     @Test
     public void testResourceNameIsReturnedCorrect() {
 
-        CleanerService cleanerService = CleanerService.getInstance();
+        ResourceDurationService resourceDurationService = ResourceDurationService.getInstance();
 
         // Testcases
-        assertEquals("index",cleanerService.getResourceName("/index.jsp"));
-        assertEquals("main",cleanerService.getResourceName("/main.do"));
-        assertEquals("api",cleanerService.getResourceName("/api"));
-        assertEquals("api",cleanerService.getResourceName("api."));
-        assertEquals("api",cleanerService.getResourceName("api?properties=upgradability"));
-        assertEquals("getBills",cleanerService.getResourceName("getBills"));
-        assertEquals("mainContent",cleanerService.getResourceName("/mainContent.do?action=SUBSCRIPTION&msisdn=300008321210&contentId=main_subscription"));
-        assertEquals("",cleanerService.getResourceName(""));
+        assertEquals("index",resourceDurationService.cleanResourceName("/index.jsp"));
+        assertEquals("main",resourceDurationService.cleanResourceName("/main.do"));
+        assertEquals("api",resourceDurationService.cleanResourceName("/api"));
+        assertEquals("api",resourceDurationService.cleanResourceName("api."));
+        assertEquals("api",resourceDurationService.cleanResourceName("api?properties=upgradability"));
+        assertEquals("getBills",resourceDurationService.cleanResourceName("getBills"));
+        assertEquals("mainContent",resourceDurationService.cleanResourceName("/mainContent.do?action=SUBSCRIPTION&msisdn=300008321210&contentId=main_subscription"));
+        assertEquals("",resourceDurationService.cleanResourceName(""));
 
     }
 
     @Test
     public void testResourceIndexReturnsCorrectValue() {
 
-        CleanerService cleanerService = CleanerService.getInstance();
-        ArrayList<LogFileLineStorable> array = new ArrayList<>();
+        ResourceDurationService resourceDurationService = ResourceDurationService.getInstance();
+        ArrayList<ResourceDurationStorable> array = new ArrayList<>();
 
         // Populate arraylist
-        array.add(new LogFileLineStorable("mainContent","38"));
-        array.add(new LogFileLineStorable("api","38"));
-        array.add(new LogFileLineStorable("getBills","38"));
+        array.add(new ResourceDurationStorable("mainContent",38));
+        array.add(new ResourceDurationStorable("api",38));
+        array.add(new ResourceDurationStorable("getBills",38));
 
         // Testcases
-        assertEquals(2,cleanerService.getIndexOfExistingResource(array, "getBills"));
-        assertEquals(0,cleanerService.getIndexOfExistingResource(array, "mainContent"));
-        assertEquals(-1,cleanerService.getIndexOfExistingResource(array, "test"));
+        assertEquals(2,resourceDurationService.getIndexOfExistingResource(array, "getBills"));
+        assertEquals(0,resourceDurationService.getIndexOfExistingResource(array, "mainContent"));
+        assertEquals(-1,resourceDurationService.getIndexOfExistingResource(array, "test"));
 
     }
 
     @Test
     public void testTimestampReturnsCorrectHourValue() {
 
-        CleanerService cleanerService = CleanerService.getInstance();
+        HistogramService histogramService = HistogramService.getInstance();
 
         // Testcases
-        assertEquals("00",cleanerService.getHourStringFromTimestamp("00:06:48,249"));
-        assertEquals("23",cleanerService.getHourStringFromTimestamp("23:06:48,249"));
+        assertEquals("00",histogramService.cleanHourStringFromTimestamp("00:06:48,249"));
+        assertEquals("23",histogramService.cleanHourStringFromTimestamp("23:06:48,249"));
         //assertEquals("?",cleanerService.getHourStringFromTimestamp("29:06:48,249"));
         //assertEquals("?",cleanerService.getHourStringFromTimestamp("299:06:48,249"));
         //assertEquals("?",cleanerService.getHourStringFromTimestamp("-1"));
