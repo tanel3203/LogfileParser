@@ -18,9 +18,6 @@ public class HistogramServiceTest {
         // Testcases
         assertEquals("00",histogramService.cleanHourStringFromTimestamp("00:06:48,249"));
         assertEquals("23",histogramService.cleanHourStringFromTimestamp("23:06:48,249"));
-        //assertEquals("?",cleanerService.getHourStringFromTimestamp("299:06:48,249"));
-        //assertEquals("?",cleanerService.getHourStringFromTimestamp("-1"));
-        //assertEquals("?",cleanerService.getHourStringFromTimestamp("22"));
     }
 
     @Test(expected = IllegalArgumentException.class)

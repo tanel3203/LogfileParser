@@ -1,8 +1,6 @@
 package ee.timing.resourceinfo;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Map;
 import java.util.stream.Collectors;
 
@@ -32,7 +30,9 @@ public class ResourceDurationService {
     }
 
     /**
-     *
+     *  Builds the request log object
+     * @param currentLineResourceName       String type current line resource name
+     * @param currentLineRequestDuration    double type current line request duration - how long the request took
      */
     public void buildResourceList(String currentLineResourceName, double currentLineRequestDuration) {
 
@@ -80,7 +80,6 @@ public class ResourceDurationService {
      *
      * @return                          returns String type resource name
      */
-
     public String cleanResourceName(String resourceString) {
 
         // Find if given string is already a resource name, then return the initial string
