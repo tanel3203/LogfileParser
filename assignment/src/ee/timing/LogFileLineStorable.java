@@ -6,13 +6,8 @@ package ee.timing;
 
 class LogFileLineStorable {
 
-    private String timestamp;
     private String resourceName;
     private String requestDuration;
-
-    public String getTimestamp() {
-        return timestamp;
-    }
 
     public String getResourceName() {
         return resourceName;
@@ -26,8 +21,7 @@ class LogFileLineStorable {
         return Integer.parseInt(requestDuration);
     }
 
-    LogFileLineStorable(String timestamp, String resourceName, String requestDuration) {
-        this.timestamp = timestamp;
+    LogFileLineStorable(String resourceName, String requestDuration) {
         this.resourceName = resourceName;
         this.requestDuration = requestDuration;
     }

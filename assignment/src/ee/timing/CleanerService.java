@@ -2,9 +2,10 @@ package ee.timing;
 
 import java.io.File;
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
- * Service class to
+ * singleton Service class used in Main.java to
  *                  parse the log file
  *                  extract
  *                  aggregate and
@@ -13,10 +14,14 @@ import java.util.*;
 
 class CleanerService {
 
+    // Singleton object
+    private static CleanerService instance = new CleanerService();
+
     // Class objects
-    private ArrayList<LogFileLineStorable> logFileData = new ArrayList<>();
-    private ArrayList<LogFileHistogramHourStorable> logFileHistogramHourData = new ArrayList<>();
-    private List<String> currentLine;
+    private ArrayList<LogFileLineStorable> logFileDataPrelim = new ArrayList<>(); // contains all needed logfile data
+    private ArrayList<LogFileTempStorable> logFileDataTemp = new ArrayList<>(); // contains all needed logfile data
+    private ArrayList<LogFileHistogramHourStorable> logFileHistogramHourData = new ArrayList<>(); // contains hourly request data
+    private List<String> currentLine; // variable for scanning through logfile row by row
 
     // Class static variables
     private static int currentLineCounter = 0;
@@ -26,13 +31,18 @@ class CleanerService {
     private static final String RESOURCE_NAME_PREFIX_REGEX = "(^/)";
     private static final String RESOURCE_NAME_SUFFIX_REGEX = "([.?])";
 
-    // Constructor
-    CleanerService() {
+    // Constructor disables inward instantiation
+    private CleanerService() {
+    }
+
+    // Exposes the only instance
+    static CleanerService getInstance() {
+        return instance;
     }
 
     /**
      * Gets the logfile and prepares an object that can be used for further manipulation
-     * @param pathToLogfile
+     * @param pathToLogfile             String type logfield name/path
      * @throws Exception
      */
     //
@@ -42,8 +52,8 @@ class CleanerService {
         Scanner input = new Scanner(new File(pathToLogfile));
 
         // Get every line from file and with a pre-determined delimiter prepare
-        //                              1) logFileData           - outputs time-heavy resources
-        //                              2) logHistogramHourData  - outputs hourly info and a histogram
+        //                              1) logFileData           - object for time-heavy resources
+        //                              2) logHistogramHourData  - object for hourly info and a histogram
         while (input.hasNextLine()) {
 
             // Set counter to current line;
@@ -62,42 +72,17 @@ class CleanerService {
             if (currentLineSize == 7 || currentLineSize == 8 || currentLineSize == 9) {
 
                 // Variables for logFileData
-                String currentLineTimestamp = currentLine.get(1);
                 String currentLineResourceName = getResourceName(currentLine.get(4));
                 String currentLineRequestDuration = currentLine.get(currentLine.size() - 1);
 
                 // Additional variables for logFileHistogramData
                 String currentLineTimestampHour = getHourStringFromTimestamp(currentLine.get(1));
 
-                // Find if logFileData already has a record of current resource
-                int resourceExistsIndex = getIndexOfExistingResource(logFileData, currentLineResourceName);
+                // Add new object to logFileDataPrelim
+                logFileDataPrelim.add(new LogFileLineStorable(currentLineResourceName, currentLineRequestDuration));
 
                 // Find if logFileHistogramData already has data for the given hour
                 int hourExistsIndex = getIndexOfExistingHour(logFileHistogramHourData, currentLineTimestampHour);
-
-                // Update current record in existing logFileData
-                if (resourceExistsIndex >= 0) {
-
-                    // Get existing record's record duration and update it with the current duration
-                    String existingRecordRequestDuration = logFileData.get(resourceExistsIndex).getRequestDuration();
-                    String updatedRecordRequestDuration = String.valueOf(Integer.parseInt(existingRecordRequestDuration)
-                                                                    + Integer.parseInt(currentLineRequestDuration));
-
-                    // Set the existing record object in ArrayList to an updated object
-                    logFileData.set(resourceExistsIndex,
-                            new LogFileLineStorable(currentLineTimestamp, currentLineResourceName, updatedRecordRequestDuration));
-
-                }
-                // Add new record into logFileData
-                else if (resourceExistsIndex == -1) {
-
-                    // Add new object to logFileData
-                    logFileData.add(new LogFileLineStorable(currentLineTimestamp, currentLineResourceName, currentLineRequestDuration));
-
-                } else {
-                    throw new IllegalArgumentException("Unexpected result with resource name on line " + currentLineCounter
-                                                    + " with value " + currentLineResourceName);
-                }
 
                 // Update current record in existing logFileHistogramData
                 if (hourExistsIndex >= 0) {
@@ -126,13 +111,27 @@ class CleanerService {
             }
         }
 
-        // Sort filled logFileData object from highest request duration item to lowest
-        Collections.sort(logFileData, new Comparator<LogFileLineStorable>() {
+        // logFileDataPrelim
+        // Find if logFileDataPrelim already has a record of current resource
+        Map<String, Double> logFileDataUnique = logFileDataPrelim.stream().collect(
+                Collectors.groupingBy(LogFileLineStorable::getResourceName, Collectors.averagingInt(LogFileLineStorable::getRequestDurationCast))
+        );
+
+
+
+        System.out.println("##################################################");
+        logFileDataUnique.forEach((name,value) -> logFileDataTemp.add(new LogFileTempStorable(name, (double) Math.round(value))));
+
+        // Sort logFileHistogramData by hour (00-23)
+        Collections.sort(logFileDataTemp, new Comparator<LogFileTempStorable>() {
             @Override
-            public int compare(LogFileLineStorable p1, LogFileLineStorable p2) {
-                return p2.getRequestDurationCast() - p1.getRequestDurationCast(); // Descending
+            public int compare(LogFileTempStorable p1, LogFileTempStorable p2) {
+                return (int) p2.getRequestDuration() - (int) p1.getRequestDuration(); // Descending
             }
         });
+
+        //logFileDataTemp.forEach((name,value) -> System.out.println(name + " " + value));
+        System.out.println("##################################################");
 
         // Sort logFileHistogramData by hour (00-23)
         Collections.sort(logFileHistogramHourData, new Comparator<LogFileHistogramHourStorable>() {
@@ -142,6 +141,19 @@ class CleanerService {
             }
         });
 
+        // Output top n resources by request duration
+        int n = 10;
+        int counter = 0;
+        for (LogFileTempStorable item : logFileDataTemp) {
+
+            if (counter == n) {
+                break;
+            }
+
+            System.out.format("%40s%15d", item.getResourceName(), (int) item.getRequestDuration());
+            System.out.println();
+            counter++;
+        }
 
         // Output hourly information with histogram
         System.out.format("%15s%15s%15s%3s%15s", "Hour", "Request count", "Total requests", "   ", " Requests (%)");

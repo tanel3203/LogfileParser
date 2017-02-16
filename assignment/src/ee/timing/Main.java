@@ -56,16 +56,24 @@ public class Main {
 
     }
 
+    /**
+     * Starts the CleanerService with the reference to logfile
+     * @param logFile            String type logfile reference
+     * @throws Exception
+     */
     private static void startLogFileClean(String logFile) throws Exception {
 
-        // Initialize logfile cleaner
-        CleanerService cleanerService = new CleanerService();
+        // Start logfile cleaner
+        CleanerService cleanerService = CleanerService.getInstance();
 
         // Run cleaner
         cleanerService.generateLogFileData(logFile);
 
     }
 
+    /**
+     * Outputs to commandline helper info when '-h' tag is used
+     */
     private static void outputHelperInfo() {
         System.out.println("--------------------------------------------------------------");
         System.out.format("%10s%50s", "usage", "description");
