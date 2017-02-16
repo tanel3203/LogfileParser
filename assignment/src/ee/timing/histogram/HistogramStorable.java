@@ -4,7 +4,7 @@ package ee.timing.histogram;
  * Model class for hourly data to compose the histogram
  */
 
-public class LogFileHistogramHourStorable {
+public class HistogramStorable {
 
     private String timestamp;
     private int requestCount;
@@ -17,7 +17,7 @@ public class LogFileHistogramHourStorable {
         return requestCount;
     }
 
-    public LogFileHistogramHourStorable(String timestamp, int requestCount) {
+    public HistogramStorable(String timestamp, int requestCount) {
         this.timestamp = timestamp;
         this.requestCount = requestCount;
     }

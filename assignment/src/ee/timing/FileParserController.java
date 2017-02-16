@@ -1,22 +1,22 @@
 package ee.timing;
 
 import ee.timing.histogram.HistogramService;
-import ee.timing.resourceinfo.ResourceDurationService;
+import ee.timing.resourceinfo.ResourceInfoService;
 import java.io.File;
 import java.util.*;
 
 /**
- * singleton Service class to
+ * singleton Controller class to
  *                  parse the log file
  *                  extract
  *                  aggregate and
  *                  present data from it
  */
 
-public class FileParserService {
+public class FileParserController {
 
     // Singleton object instance
-    private static FileParserService instance = new FileParserService();
+    private static FileParserController instance = new FileParserController();
 
     // Class objects
     private List<String> currentLine; // variable for scanning through logfile row by row
@@ -28,11 +28,11 @@ public class FileParserService {
     private static final String FILE_COLUMN_DELIMITER = " ";
 
     // Constructor disables inward instantiation
-    private FileParserService() {
+    private FileParserController() {
     }
 
     // Exposes the only instance
-    public static FileParserService getInstance() {
+    public static FileParserController getInstance() {
         return instance;
     }
 
@@ -46,7 +46,7 @@ public class FileParserService {
 
         // Start services
         HistogramService histogramService = HistogramService.getInstance();
-        ResourceDurationService resourceDurationService = ResourceDurationService.getInstance();
+        ResourceInfoService resourceDurationService = ResourceInfoService.getInstance();
 
         // Get the file
         Scanner input = new Scanner(new File(pathToLogfile));

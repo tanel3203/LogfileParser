@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project default="run" name="Logfile analyser">
+<project default="run" name="FileParser program for data visualisation from logfiles">
 
     <!-- define properties -->
     <property name="build.dir" value="dist" />
@@ -7,7 +7,7 @@
     <property name="src.dir" value="src" />
     <property name="lib.dir" value="${build.dir}/lib" />
 
-    <property name="main-class" value="ee.timing.Main" />
+    <property name="main-class" value="ee.timing.FileParser" />
     <property name="jar-name" value="assignment" />
 
     <path id="classpath">

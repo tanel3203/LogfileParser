@@ -4,7 +4,7 @@ package ee.timing.resourceinfo;
  * Model class for storing resource data
  */
 
-public class ResourceDurationStorable {
+public class ResourceInfoStorable {
 
     private String resourceName;
     private double requestDuration;
@@ -21,7 +21,7 @@ public class ResourceDurationStorable {
         return (int) requestDuration;
     }
 
-    public ResourceDurationStorable(String resourceName, double requestDuration) {
+    public ResourceInfoStorable(String resourceName, double requestDuration) {
         this.resourceName = resourceName;
         this.requestDuration = requestDuration;
     }

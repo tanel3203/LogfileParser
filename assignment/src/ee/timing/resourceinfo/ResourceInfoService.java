@@ -1,31 +1,28 @@
 package ee.timing.resourceinfo;
 
 import java.util.ArrayList;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
  *  singleton Service for creating the resource list with average durations
  */
-public class ResourceDurationService {
+public class ResourceInfoService {
 
     // Constants
     private static final String RESOURCE_NAME_PREFIX_REGEX = "(^/)";
     private static final String RESOURCE_NAME_SUFFIX_REGEX = "([.?])";
 
     // Singleton object instance
-    private static ResourceDurationService instance = new ResourceDurationService();
+    private static ResourceInfoService instance = new ResourceInfoService();
 
     // Class objects
-    private ArrayList<ResourceDurationStorable> logFileData = new ArrayList<>(); // contains all initial logfile data
-    private ArrayList<ResourceDurationStorable> logFileDataUnique = new ArrayList<>(); // contains all cleaned logfile data
+    private ArrayList<ResourceInfoStorable> logFileData = new ArrayList<>(); // contains all initial logfile data
 
     // Constructor disables inward instantiation
-    private ResourceDurationService() {
+    private ResourceInfoService() {
     }
 
     // Exposes the only instance
-    public static ResourceDurationService getInstance() {
+    public static ResourceInfoService getInstance() {
         return instance;
     }
 
@@ -37,7 +34,7 @@ public class ResourceDurationService {
     public void buildResourceList(String currentLineResourceName, double currentLineRequestDuration) {
 
         // Add new object to logFileData
-        logFileData.add(new ResourceDurationStorable(currentLineResourceName, currentLineRequestDuration));
+        logFileData.add(new ResourceInfoStorable(currentLineResourceName, currentLineRequestDuration));
 
     }
 
@@ -48,13 +45,13 @@ public class ResourceDurationService {
      * @return                      returns index of existing resource name
      *                              if none exists, returns -1
      */
-    public int getIndexOfExistingResource(ArrayList<ResourceDurationStorable> array, String searchString) {
+    public int getIndexOfExistingResource(ArrayList<ResourceInfoStorable> array, String searchString) {
 
         int index = -1;
         boolean matchFound = false;
 
         // Iterate until match is found
-        for (ResourceDurationStorable item : array) {
+        for (ResourceInfoStorable item : array) {
             index++;
             if (item.containsName(searchString)) {
                 matchFound = true;
@@ -95,38 +92,15 @@ public class ResourceDurationService {
     }
 
     /**
-     * Sorts and outputs to commandline the highest average time-duration requests
+     * Starts and runs view that sorts and outputs to commandline the highest average time-duration requests
      * @param resourceDisplayCount          int type resource display count - how many the user wants to see
      */
     public void sortAndOutputRequestsAndAverages(int resourceDisplayCount) {
 
-        // Collect resources in logFileData and average request duration by resource name
-        Map<String, Double> logFileDataMap = logFileData.stream().collect(
-                Collectors.groupingBy(
-                        ResourceDurationStorable::getResourceName,
-                        Collectors.averagingInt(ResourceDurationStorable::getRequestDurationInteger)
-                )
-        );
+        // Start view instance
+        ResourceInfoView resourceInfoView = ResourceInfoView.getInstance();
 
-        // Move unique data into a LogFileLineStorable type object
-        logFileDataMap.forEach((name,value) ->
-                logFileDataUnique.add(new ResourceDurationStorable(name, (double) Math.round(value))));
-
-        // Sort logFileHistogramData by hour (00-23)
-        logFileDataUnique.sort((d1, d2) -> {
-            return d2.getRequestDurationInteger() - d1.getRequestDurationInteger(); // Descending
-        });
-
-        // Output top n resources by request duration
-        System.out.println("--------------------------------------------------------------");
-        System.out.format("\n%50s\n\n", "TOP REQUESTS BY AVG TIME");
-        System.out.println("--------------------------------------------------------------");
-        int counter = 0;
-        for (ResourceDurationStorable item : logFileDataUnique) {
-            if (counter == resourceDisplayCount) { break; }
-            System.out.format("%40s%15d\n", item.getResourceName(), (int) item.getRequestDuration());
-            counter++;
-        }
-        System.out.println("--------------------------------------------------------------");
+        // Run view instance
+        resourceInfoView.sortAndOutputRequestsAndAverages(logFileData, resourceDisplayCount);
     }
 }

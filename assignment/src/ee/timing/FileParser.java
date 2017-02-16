@@ -4,7 +4,7 @@ package ee.timing;
  * Main class for running the application from the command line.
  */
 
-public class Main {
+public class FileParser {
 
     // Constants
     private static final int MAX_RESOURCE_REQUEST_COUNT = 50;
@@ -64,7 +64,7 @@ public class Main {
     private static void startLogFileClean(String logFile, String resourceCount) throws Exception {
 
         // Start logfile cleaner
-        FileParserService fileParserService = FileParserService.getInstance();
+        FileParserController fileParserService = FileParserController.getInstance();
 
         // Run cleaner
         fileParserService.generateLogFileData(logFile, resourceCount);
