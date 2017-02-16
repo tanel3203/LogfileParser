@@ -1,7 +1,7 @@
 package ee.timing.histogram;
 
 /**
- * Model class for hourly data to compose the histogram, used in CleanerService.java
+ * Model class for hourly data to compose the histogram
  */
 
 public class LogFileHistogramHourStorable {

@@ -1,7 +1,7 @@
 package ee.timing.resourceinfo;
 
 /**
- * Model class for storing resource data, used in CleanerService.java
+ * Model class for storing resource data
  */
 
 public class ResourceDurationStorable {

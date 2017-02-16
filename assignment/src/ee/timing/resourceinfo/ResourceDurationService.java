@@ -1,10 +1,10 @@
 package ee.timing.resourceinfo;
 
-import ee.timing.histogram.LogFileHistogramHourStorable;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  *  singleton Service for creating the resource list with average durations
@@ -15,10 +15,10 @@ public class ResourceDurationService {
     private static final String RESOURCE_NAME_PREFIX_REGEX = "(^/)";
     private static final String RESOURCE_NAME_SUFFIX_REGEX = "([.?])";
 
-    // Singleton object
+    // Singleton object instance
     private static ResourceDurationService instance = new ResourceDurationService();
 
-    // Cöass objects
+    // Class objects
     private ArrayList<ResourceDurationStorable> logFileData = new ArrayList<>(); // contains all initial logfile data
     private ArrayList<ResourceDurationStorable> logFileDataUnique = new ArrayList<>(); // contains all cleaned logfile data
 
@@ -34,7 +34,10 @@ public class ResourceDurationService {
     /**
      *
      */
-    void makeResourceList() {
+    public void buildResourceList(String currentLineResourceName, double currentLineRequestDuration) {
+
+        // Add new object to logFileData
+        logFileData.add(new ResourceDurationStorable(currentLineResourceName, currentLineRequestDuration));
 
     }
 
@@ -81,40 +84,50 @@ public class ResourceDurationService {
     public String cleanResourceName(String resourceString) {
 
         // Find if given string is already a resource name, then return the initial string
-        if ((!resourceString.contains("/"))
-                && (!resourceString.contains("."))
-                && (!resourceString.contains("?"))) {
+        if (resourceString.matches(RESOURCE_NAME_PREFIX_REGEX)
+                && resourceString.matches(RESOURCE_NAME_SUFFIX_REGEX)) {
             return resourceString;
         }
 
-        // Find the resource name from the resource string eliminating unnecessary URI and query string content
-        String resourceName = resourceString.replaceAll(RESOURCE_NAME_PREFIX_REGEX, "").split(RESOURCE_NAME_SUFFIX_REGEX)[0];
-
-        return resourceName;
+        // Find and return the resource name from the resource string eliminating unnecessary URI and query string content
+        return resourceString
+                .replaceAll(RESOURCE_NAME_PREFIX_REGEX, "")
+                .split(RESOURCE_NAME_SUFFIX_REGEX)[0];
     }
 
     /**
-     *
+     * Sorts and outputs to commandline the highest average time-duration requests
+     * @param resourceDisplayCount          int type resource display count - how many the user wants to see
      */
-    public void sortAndOutputRequestsAndAverages(ArrayList<ResourceDurationStorable> logFileDataUnique, int resourceDisplayCount) {
+    public void sortAndOutputRequestsAndAverages(int resourceDisplayCount) {
 
-        // Sort logFileHistogramData by hour (00-23)
-        Collections.sort(logFileDataUnique,
-                Comparator.comparingInt(ResourceDurationStorable::getRequestDurationInteger)
+        // Collect resources in logFileData and average request duration by resource name
+        Map<String, Double> logFileDataMap = logFileData.stream().collect(
+                Collectors.groupingBy(
+                        ResourceDurationStorable::getResourceName,
+                        Collectors.averagingInt(ResourceDurationStorable::getRequestDurationInteger)
+                )
         );
 
+        // Move unique data into a LogFileLineStorable type object
+        logFileDataMap.forEach((name,value) ->
+                logFileDataUnique.add(new ResourceDurationStorable(name, (double) Math.round(value))));
+
+        // Sort logFileHistogramData by hour (00-23)
+        logFileDataUnique.sort((d1, d2) -> {
+            return d2.getRequestDurationInteger() - d1.getRequestDurationInteger(); // Descending
+        });
+
         // Output top n resources by request duration
+        System.out.println("--------------------------------------------------------------");
+        System.out.format("\n%50s\n\n", "TOP REQUESTS BY AVG TIME");
+        System.out.println("--------------------------------------------------------------");
         int counter = 0;
         for (ResourceDurationStorable item : logFileDataUnique) {
-
-            if (counter == resourceDisplayCount) {
-                break;
-            }
-
-            System.out.format("%40s%15d", item.getResourceName(), (int) item.getRequestDuration());
-            System.out.println();
+            if (counter == resourceDisplayCount) { break; }
+            System.out.format("%40s%15d\n", item.getResourceName(), (int) item.getRequestDuration());
             counter++;
         }
-
+        System.out.println("--------------------------------------------------------------");
     }
 }

@@ -6,8 +6,12 @@ package ee.timing;
 
 public class Main {
 
-    //  ----------------------------------- TEMPORARY
-    private static final String PATH_NAME = "resources/timing.log";
+    // Constants
+    private static final int MAX_RESOURCE_REQUEST_COUNT = 50;
+    private static final int ARGS_COUNT_LOWER_BOUND = 2;
+    private static final int ARGS_COUNT_UPPER_BOUND = 3;
+    private static final int ARGS_COUNT_NO_HELP = 2;
+    private static final int ARGS_COUNT_WITH_HELP = 3;
 
     /**
      * Entry point that starts the application. The purpose is to show the n most time-duration heavy resources and
@@ -21,32 +25,27 @@ public class Main {
 
         // Start stopwatch for program run time
         long startTime = System.currentTimeMillis();
-/*
+
         // Store command line argument count in variable for use in conditional logic handling
         int argumentsLength = args.length;
 
         // Logic for handling user input
-        if (argumentsLength < 1 || argumentsLength > 2) {
-            throw new Exception("Illegal number of arguments. 1-2 arguments are allowed. One log file argument and optionally '-h' for help info");
-        } else if (argumentsLength >= 1 && argumentsLength <= 2) {
-            if (args[0] == "-h") {
+        if (argumentsLength < ARGS_COUNT_LOWER_BOUND || argumentsLength > ARGS_COUNT_UPPER_BOUND) {
+            throw new Exception("Illegal request. 2-3 arguments are allowed. One log file argument, resource count and optionally '-h' for help info\n\n"
+                    + "Use the following format: '[-h] <logfilepath> <resource count>");
+        } else if (argumentsLength >= ARGS_COUNT_LOWER_BOUND && argumentsLength <= ARGS_COUNT_UPPER_BOUND) {
+            if (args[0].length() == 2 && args[0].contains("h") && argumentsLength == ARGS_COUNT_WITH_HELP) {
                 outputHelperInfo();
-                // startLogFileClean(args[1]);
-            } else if (args[1] == "-h") {
-                outputHelperInfo();
-                // startLogFileClean(args[0]);
-            } else if (argumentsLength == 1) {
-                // startLogFileClean(args[0]);
+                startLogFileClean(args[1], args[2]);
+            }  else if (Integer.parseInt(args[1]) < MAX_RESOURCE_REQUEST_COUNT && argumentsLength == ARGS_COUNT_NO_HELP) {
+                startLogFileClean(args[0], args[1]);
             } else {
-                throw new Exception("Illegal number of arguments. 1-2 arguments are allowed. One log file argument and optionally '-h' for help info");
+                throw new Exception("Illegal request. 2-3 arguments are allowed. One log file argument, resource count and optionally '-h' for help info\n\n"
+                                    + "Use the following format: '[-h] <logfilepath> <resource count>");
             }
         } else {
-            throw new Exception("Unexpected outcome during command input. Please try again. 1-2 arguments are allowed. One log file argument and optionally '-h' for help info");
-        }
-*/
-        // TEMPORARY
-        outputHelperInfo();
-        startLogFileClean(PATH_NAME);
+            throw new Exception("Illegal request. 2-3 arguments are allowed. One log file argument, resource count and optionally '-h' for help info\n\n"
+                    + "Use the following format: '[-h] <logfilepath> <resource count>");        }
 
         // Stop stopwatch for program run time
         long endTime = System.currentTimeMillis();
@@ -59,15 +58,16 @@ public class Main {
     /**
      * Starts the CleanerService with the reference to logfile
      * @param logFile            String type logfile reference
+     * @param resourceCount      String type resource count - how many lines user wants to see - highest average duration
      * @throws Exception
      */
-    private static void startLogFileClean(String logFile) throws Exception {
+    private static void startLogFileClean(String logFile, String resourceCount) throws Exception {
 
         // Start logfile cleaner
-        CleanerService cleanerService = CleanerService.getInstance();
+        FileParserService fileParserService = FileParserService.getInstance();
 
         // Run cleaner
-        cleanerService.generateLogFileData(logFile);
+        fileParserService.generateLogFileData(logFile, resourceCount);
 
     }
 
@@ -76,22 +76,23 @@ public class Main {
      */
     private static void outputHelperInfo() {
         System.out.println("--------------------------------------------------------------");
-        System.out.format("%10s%50s", "usage", "description");
-        System.out.println();
-        System.out.format("%10s%50s", "'-h'", "tag to access this page");
-        System.out.println();
-        System.out.format("%10s%50s", "'ant run'", "builds and runs current program with presets");
-        System.out.println();
-        System.out.format("%10s%50s", "'ant build'", "builds current program");
-        System.out.println();
-        System.out.format("%10s%50s", "'java -jar <jarpath> <logfilepath> <n>'", "\n\t\t\t\t\t\tbuilds logfile program w/ n rows");
-        System.out.println();
+        System.out.format("\n%50s\n\n", "HELP INFO");
         System.out.println("--------------------------------------------------------------");
-        System.out.println("Example use: go to program directory (where build.xml lives), run 'ant build'");
-        System.out.println("\tthen go to dist folder and run 'java -jar assignment.jar timing.log 10'");
-        System.out.println("Results: 1) 10 lines of most time-intensive resources ");
-        System.out.println("\t\t 2) Table with four columns showing hourly request distribution, ");
-        System.out.println("\t\t includes histogram showing where most of the resources are located");
+        System.out.format("%10s%50s\n", "usage", "description");
+        System.out.format("%10s%50s\n", "'-h'", "tag to access this page");
+        System.out.format("%10s%50s\n", "'ant run'", "builds and runs current program with presets");
+        System.out.format("%10s%50s\n", "'ant build'", "builds current program");
+        System.out.format("%10s%50s\n", "'java -jar <jarpath> <logfilepath> <n>'", "\n\t\t\tbuilds logfile program w/ n rows");
+        System.out.println("--------------------------------------------------------------");
+        System.out.println("Example use: go to program directory (where build.xml lives),");
+        System.out.println("\trun 'ant build-jar', then go to dist folder and");
+        System.out.println("\tadd a timing.log logfile to dist folder,");
+        System.out.println("\trun 'java -jar assignment.jar -h timing.log 10'");
+        System.out.println("\t (full path for log file needed, if not in dist folder)");
+        System.out.println("Results: 1) help information ");
+        System.out.println("\t 2) 10 lines of most time-intensive resources ");
+        System.out.println("\t 3) Table with four columns showing hourly request distribution, ");
+        System.out.println("\t includes histogram showing where most of the resources are located");
         System.out.println("--------------------------------------------------------------");
     }
 }
